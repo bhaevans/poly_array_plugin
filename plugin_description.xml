@@ -1,0 +1,9 @@
+<library path="libpolygon_array_plugin">
+    <class name="poly_array_plugin/PolygonArray"
+           type="poly_array_plugin::PolygonArrayDisplay"
+           base_class_type="rviz::Display">
+        <description>
+            Displays an array of polygons from poly_array_plugin/polygon_array messages.
+        </description>
+    </class>
+</library>
