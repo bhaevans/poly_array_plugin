@@ -24,19 +24,19 @@ namespace poly_array_plugin
 	void PolyVisual::setMessage(const poly_array_plugin::polygon *msg) const
 	{
 		Ogre::ColourValue color(msg->color.r,
-														msg->color.g,
-														msg->color.b,
-														msg->color.a);
-		uint32_t num_points = msg->polygon.polygon.points.size();
+					msg->color.g,
+					msg->color.b,
+					msg->color.a);
+		uint32_t num_points = msg->polygon.points.size();
 		if (num_points>0)
 		{
 			manual_object_->estimateVertexCount(num_points);
 			manual_object_->begin( "BaseWhiteNoLighting", Ogre::RenderOperation::OT_LINE_STRIP,
-															Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
+						Ogre::ResourceGroupManager::INTERNAL_RESOURCE_GROUP_NAME);
 			for (uint32_t i=0; i<num_points+1;++i)
 			{
 				// Modulo closes polygon, so last point in manual_object_==first point
-				const geometry_msgs::Point32& msg_point = msg->polygon.polygon.points[i%num_points];
+				const geometry_msgs::Point32& msg_point = msg->polygon.points[i%num_points];
 				manual_object_->position(msg_point.x,msg_point.y,msg_point.z);
 				manual_object_->colour(color);
 			}
