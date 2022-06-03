@@ -2,6 +2,7 @@
 #define POLYGON_ARRAY_DISPLAY_H
 
 #include <vector>
+#include <memory>
 
 #include <geometry_msgs/PolygonStamped.h>
 #include <rviz/message_filter_display.h>
@@ -43,7 +44,7 @@ class PolygonArrayDisplay : public rviz::MessageFilterDisplay<poly_array_plugin:
 		void processMessage(
 			const poly_array_plugin::polygon_array::ConstPtr& msg
 		) override;
-		std::vector<PolyVisual> visuals_;
+		std::vector<std::shared_ptr<PolyVisual>> visuals_;
 
 		//rviz::IntProperty* queue_size_property_;
 		//rviz::RosTopicProperty* topic_property_;

@@ -33,21 +33,21 @@ namespace poly_array_plugin
 		Ogre::Quaternion orientation;
 		Ogre::Vector3 position;
 		if (!context_->getFrameManager()->getTransform( msg->header.frame_id,
-																										msg->header.stamp,
-																										position, orientation))
+														msg->header.stamp,
+														position, orientation))
 		{
 			ROS_DEBUG( "Error transforming from frame '%s' to frame '%s'",
-									msg->header.frame_id.c_str(), qPrintable( fixed_frame_));
+						msg->header.frame_id.c_str(), qPrintable( fixed_frame_));
 			return;
 		}	
 
 		for (auto polygon_msg : msg->polygons)
 		{
-			visuals_.emplace_back(context_->getSceneManager(), scene_node_);
-			PolyVisual& visual = visuals_.back();
-			visual.setMessage(&polygon_msg);
-			visual.setFramePosition(position);
-			visual.setFrameOrientation(orientation);
+			visuals_.push_back(std::make_shared<PolyVisual>(context_->getSceneManager(), scene_node_));
+			std::shared_ptr<PolyVisual>& visual = visuals_.back();
+			visual->setMessage(&polygon_msg);
+			visual->setFramePosition(position);
+			visual->setFrameOrientation(orientation);
 		}
 	}
 
