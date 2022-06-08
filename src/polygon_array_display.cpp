@@ -32,6 +32,7 @@ namespace poly_array_plugin
 	{
 		Ogre::Quaternion orientation;
 		Ogre::Vector3 position;
+		visuals_.clear();
 		if (!context_->getFrameManager()->getTransform( msg->header.frame_id,
 														msg->header.stamp,
 														position, orientation))
